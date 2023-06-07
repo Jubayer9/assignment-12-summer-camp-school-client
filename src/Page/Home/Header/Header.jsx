@@ -12,6 +12,7 @@ const Header = () => {
     return (
         <Carousel className="w-[80%] mx-auto  " >
         <div>
+            
             <img src={img1} />
         </div>
         <div>
