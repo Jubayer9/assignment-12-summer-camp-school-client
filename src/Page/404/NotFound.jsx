@@ -2,7 +2,7 @@ import img from "../../assets/img/56872884-unusual-404-error-page-not-found-grap
 const NotFound = () => {
     return (
         <div >
-            <img className="w-full h-[758px]"  src={img} alt="" />
+            <img className="w-full h-[758px]" src={img} alt="" />
         </div>
     );
 };
