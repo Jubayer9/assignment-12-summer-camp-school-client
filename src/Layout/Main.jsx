@@ -3,6 +3,7 @@ import NevBar from '../Shared/NevBar/NevBar';
 import Footer from '../Shared/Footer/Footer';
 
 const Main = () => {
+    
     return (
         <div>
             <NevBar></NevBar>
