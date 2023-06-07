@@ -1,6 +1,14 @@
 import { Link } from "react-router-dom";
 import Logo from '../../assets/img/pngtree-piano-violin-musical-logo-inspiration-isolated-on-white-backgr-png-image_5004482.jpg'
+import { useContext } from "react";
+import { AuthContext } from "../../Page/Provider/AuthProvider";
 const NevBar = () => {
+    const {user,logOut}=useContext(AuthContext)
+    const handleLogOut =()=>{
+        logOut()
+        .then(()=>{})
+        .catch(error=> console.error(error))
+    }
     return (
   <>
         <div className="navbar text-white bg-violet-700">
@@ -28,7 +36,16 @@ const NevBar = () => {
     </ul>
   </div>
   <div className="navbar-end">
-    <Link to='/login'  className=" btn btn-error btn-outline ">Login</Link>
+    
+    {
+        user?
+        <>
+           <Link onClick={handleLogOut} to='/login'  className=" btn btn-error btn-outline ">Log out</Link>
+        </>:
+        <>
+        <Link to='/login'  className=" btn btn-error btn-outline ">Login</Link>
+        </>
+    }
   </div>
 </div>
   </>

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import loginImg from "../../assets/img/musical-melody-symbols-with-many-doodle-kids-cartoon-character_1308-62193.avif";
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const Login = () => {
     const {signIn}= useContext(AuthContext)
@@ -15,7 +16,15 @@ const Login = () => {
         .then(result =>{
             const user = result.user;
             console.log(user);
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Your work has been saved',
+                showConfirmButton: false,
+                timer: 1500
+              })
         })
+        
     }
     return (
         <div>
