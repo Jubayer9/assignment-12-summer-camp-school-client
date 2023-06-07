@@ -4,6 +4,8 @@ import NotFound from "../Page/404/NotFound";
 import Home from "../Page/Home/Home/Home";
 import Login from "../Page/Login/Login";
 import SingUp from "../SingUp/SingUp";
+import Dashboard from "../Page/Dashboard/Dashboard";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
     {
@@ -21,9 +23,13 @@ export const router = createBrowserRouter([
             {
                 path:'signup',
                 element:<SingUp></SingUp>
-                
+
             }
         ]
+    },
+    {
+        path:'/dashboard',
+        element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>
     },
     
 
