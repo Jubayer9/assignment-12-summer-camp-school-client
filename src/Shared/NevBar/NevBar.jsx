@@ -12,7 +12,7 @@ const NevBar = () => {
       <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
         <li><Link to='/' >Home</Link></li>
         <li><Link to='/' > Instructors</Link></li>
-        <li><Link to='/' >Classes</Link></li>
+        <li><Link to='/' > Classes</Link></li>
    
       </ul>
     </div>
