@@ -17,7 +17,7 @@ const SingUp = () => {
 
     return (
       <div>
-     <div className=" bg-white">
+     <div  className=" bg-white">
   <div className="hero-content   ">
     <div className="text-center lg:text-left ">
      <img  src={loginImg} alt="" />
