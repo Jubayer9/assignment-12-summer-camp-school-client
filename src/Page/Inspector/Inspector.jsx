@@ -1,28 +1,35 @@
-import React from 'react';
+import { useEffect, useState } from "react";
+import InstructorCard from "./InstructorCard";
+import SectionTitle from "../SectionTitle/SectionTitle";
 
 const Inspector = () => {
+    const [instructor,setInstructor]=useState([])
+    useEffect(()=>{
+        fetch('http://localhost:5000/instructor')
+        .then(res => res.json())
+        .then(data=>{
+            const instructor =data.filter(sir =>sir.number ==='0134534456656')
+            setInstructor(instructor)
+        })
+    },[])
     return (
-        <div className='inspector'>
-            <div className="slide-container">
-                <div className="slide-content">
-                    <div className="card-wrapper">
-                        <div className="card">
-                            <div className="img-content">
-                                <span className="overlay"></span>
-                                <div className="card-img">
-                                    <img className='img' src="" alt="" />
-                                </div>
-                            </div>
-
-                            <div className="card-content">
-                                <h2 className="name"></h2>
-                                <p className="email"></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+      <>
+      <SectionTitle
+       heading=' Popular Instructor'
+       subHeading=' Hurry up learning'
+       ></SectionTitle>
+      <div className="grid grid-rows-2 gap-4 md:grid-flow-col "> 
+  
+        {
+            instructor.map(sir=><InstructorCard
+            key={sir._id}
+            sir={sir}
+            
+            ></InstructorCard>)
+        }
+      </div>
+    
+      </>
     );
 };
 

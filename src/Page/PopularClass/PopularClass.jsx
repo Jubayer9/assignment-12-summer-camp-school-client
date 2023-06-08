@@ -5,7 +5,7 @@ import ClassCart from './ClassCart';
 const PopularClass = () => {
     const [classes,setClasses]=useState([])
     useEffect(() => {
-        fetch('class.json')
+        fetch('http://localhost:5000/classes')
             .then(res => res.json())
             .then(data =>{
                 const PopularClasses =data.filter(oneClass =>oneClass.category ==='popular')
