@@ -28,7 +28,7 @@ const Inspector = () => {
             ></InstructorCard>)
         }
       </div>
-    
+  
       </>
     );
 };
