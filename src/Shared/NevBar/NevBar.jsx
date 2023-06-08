@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import profileImg from "../../assets/img/images.png"
 import Logo from '../../assets/img/pngtree-piano-violin-musical-logo-inspiration-isolated-on-white-backgr-png-image_5004482.jpg'
 import { useContext } from "react";
 import { AuthContext } from "../../Page/Provider/AuthProvider";
@@ -42,6 +43,9 @@ const NevBar = () => {
     {
         user?
         <>
+        <p className=' text-violet-700 font-semibold hover:text-white'>🎸 {user.displayName} 🎸</p>
+        <img className="rounded-full w-10 mx-6" src={user&& user.photoURL?user.photoURL:profileImg} alt="" />
+        
            <Link onClick={handleLogOut} to='/login'  className=" btn btn-error btn-outline ">Log out</Link>
         </>:
         <>
