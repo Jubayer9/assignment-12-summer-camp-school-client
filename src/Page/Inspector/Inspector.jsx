@@ -18,7 +18,7 @@ const Inspector = () => {
        heading=' Popular Instructor'
        subHeading=' Hurry up learning'
        ></SectionTitle>
-      <div className="grid grid-rows-2 gap-4 md:grid-flow-col "> 
+      <div className="grid md:grid-cols-3 gap-8 "> 
   
         {
             instructor.map(sir=><InstructorCard
