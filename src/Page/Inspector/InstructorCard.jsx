@@ -6,9 +6,7 @@ const InstructorCard = ({ sir }) => {
       <div data-aos="fade-down"
         data-aos-easing="linear"
         data-aos-duration="1500">
-
-
-
+          
         <div className="card bg-gradient-to-r from-violet-700 to-violet-600 w-96 shadow-violet-700 shadow-lg">
           <p className="text-red-600 mx-44 w-16 rounded-b-lg bg-black text-center">{best}</p>
           <figure className="px-10 pt-10">
