@@ -22,7 +22,7 @@ const NevBar = () => {
         <li><Link to='/' >Home</Link></li>
         <li><Link to='/instructor' >Instructors</Link></li>
         <li><Link to='/allClasses'>classes</Link></li>
-        <li><Link to='/dashboard'>Dashboard</Link>
+        <li><Link to='/dashboard/myClass'>Dashboard</Link>
         
         </li>
    
@@ -37,7 +37,7 @@ const NevBar = () => {
       <li><Link to='/instructor'> Instructors</Link></li>
     
       <li><Link to='/allClasses'>classes</Link></li>
-      <li><Link to='/dashboard'>Dashboard</Link></li>
+      <li><Link to='/dashboard/myClass'>Dashboard</Link></li>
     </ul>
   </div>
   <div className="navbar-end">

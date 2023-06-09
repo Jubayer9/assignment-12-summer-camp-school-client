@@ -9,3 +9,8 @@
     padding: 20px;
 }
 
+.drawer-side a.active{
+color: rgb(255, 28, 28);
+background-color: transparent;
+
+}
