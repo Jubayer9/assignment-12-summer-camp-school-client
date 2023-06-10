@@ -1,9 +1,40 @@
 import { FaTrash } from "react-icons/fa";
 import useClass from "../../Hook/useClass";
+import Swal from "sweetalert2";
 
 const MyClass = () => {
-    const [selected]=useClass()
+    const [selected,refetch]=useClass()
     const total = selected.reduce((sum,item)=> item.price + sum, 0)
+    const handleDelete= item=>{
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Deleted Now'
+          }).then((result) => {
+            if (result.isConfirmed) {
+           
+            fetch(`http://localhost:5000/selected/${item._id}`,{
+                method:'DELETE'
+
+            })
+            .then(res =>res.json())
+            .then(data=>{
+                if(data.deletedCount >0){
+                    refetch();
+                    Swal.fire(
+                        'Deleted!',
+                        'Your file has been deleted.',
+                        'success'
+                      )
+                }
+            })
+            }
+          })
+    }
    
     return (
         <div>
@@ -52,7 +83,7 @@ const MyClass = () => {
                 </td>
                 <td>${my.price}</td>
                 <th>
-                  <button className="btn btn-ghost btn-xs">details</button>
+                  <button onClick={()=>handleDelete(my)} className="btn btn-ghost btn-xs">remove</button>
                 </th>
               </tr>)
         }

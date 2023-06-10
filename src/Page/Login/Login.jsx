@@ -3,11 +3,34 @@ import loginImg from "../../assets/img/musical-melody-symbols-with-many-doodle-k
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
+import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
-    const { signIn } = useContext(AuthContext)
+
+    const { signIn, googleSinIn } =useContext(AuthContext)
     const navigate = useNavigate()
     const location = useLocation()
+
+    const handleGoogleSinIn = () => {
+        googleSinIn()
+        .then(result => {
+            const loggedInUser = result.user;
+            const saveStudent = { name: loggedInUser.displayName, email: loggedInUser.email }
+                fetch('http://localhost:5000/students', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(saveStudent)
+                })
+                    .then(res => res.json())
+                    .then(() => {
+                        navigate(from, { replace: true });
+
+                    })
+            })
+    }
+
     const from = location.state?.from?.pathname || "/"
     const handelLogin = event => {
         event.preventDefault()
@@ -60,6 +83,12 @@ const Login = () => {
                                 Welcome new Student
                                 <Link className="text-red-500" to='/signup'> Sign Up</Link>
                             </p>
+                            <div class="divider ">OR</div>
+                            <button onClick={handleGoogleSinIn} className="text-6xl mx-auto" type="button" >
+                                <FcGoogle></FcGoogle>
+
+                            </button>
+
                         </form>
                     </div>
                 </div>

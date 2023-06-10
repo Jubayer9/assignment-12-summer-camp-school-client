@@ -2,18 +2,22 @@
 import { useContext } from 'react';
 import { AuthContext } from '../Provider/AuthProvider';
 import { useQuery } from 'react-query';
+import useAxiosSecure from './useAxiosSecure';
 
 const useClass = () => {
-    const { user } = useContext(AuthContext)
-    const {refetch, data: selected = [] } = useQuery({
+    const { user,loading } = useContext(AuthContext)
+    const [axiosSecure] = useAxiosSecure();
+    const { refetch, data: selected = [] } = useQuery({
         queryKey: ['selected', user?.email],
+        enabled:!loading,
         queryFn: async () => {
-            const response = await fetch(`http://localhost:5000/selected?email=${user?.email}`)
-            return response.json()
-        }
+            const res = await axiosSecure(`/selected?email=${user?.email}`)
+            console.log('res axios', res);
+            return res.data
+        },
     })
     console.log(selected);
-    return [selected,refetch]
+    return [selected, refetch]
 };
 
 export default useClass;

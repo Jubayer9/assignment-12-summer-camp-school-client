@@ -6,7 +6,9 @@ const Main = () => {
     
     return (
         <div>
-            <NevBar></NevBar>
+            <NevBar>
+                
+            </NevBar>
             <Outlet></Outlet>
             <Footer></Footer>
         </div>

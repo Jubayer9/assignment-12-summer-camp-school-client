@@ -1,8 +1,8 @@
-import React, { useContext } from 'react';
 import { AuthContext } from '../Provider/AuthProvider';
 import Swal from 'sweetalert2';
 import { useLocation, useNavigate } from 'react-router-dom';
 import useClass from '../Hook/useClass';
+import { useContext } from 'react';
 
 const AllClassCart = ({ allClass, index }) => {
     const { _id, image, name, instructorName, availableSeats, price } = allClass;

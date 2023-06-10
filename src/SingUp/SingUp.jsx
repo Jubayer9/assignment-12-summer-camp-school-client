@@ -4,12 +4,19 @@ import { useForm } from "react-hook-form";
 import { useContext } from "react";
 import { AuthContext } from "../Page/Provider/AuthProvider";
 import Swal from "sweetalert2";
+import { FcGoogle } from "react-icons/fc";
 const SingUp = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
-    const { createUser, updateUserProfile } = useContext(AuthContext)
+    const { createUser, updateUserProfile, googleSinIn } = useContext(AuthContext)
     const navigate = useNavigate()
     const location = useLocation()
-
+    const handleGoogleSinIn = () => {
+        googleSinIn()
+            .then(result => {
+                const loggedInUser = result.user;
+                navigate(from, { replace: true });
+            })
+    }
     const from = location.state?.from?.pathname || "/"
 
     const onSubmit = data => {
@@ -19,20 +26,35 @@ const SingUp = () => {
                 const loggedUser = result.user;
                 console.log(loggedUser);
                 updateUserProfile(data.name, data.photoURL)
-                .then(()=>{
-                    console.log('user profile info updated');
-                    reset();
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: ' New Student created successfully',
-                        showConfirmButton: false,
-                        timer: 1500
-                      })
-                })
+                    .then(() => {
+                        const saveStudent = { name: data.name, email: data.email }
+                        fetch('http://localhost:5000/students', {
+                            method: 'POST',
+                            headers: {
+                                'content-type': 'application/json'
+                            },
+                            body: JSON.stringify(saveStudent)
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.insertedId) {
+                                    reset();
+                                    Swal.fire({
+                                        position: 'top-end',
+                                        icon: 'success',
+                                        title: ' New Student created successfully',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    })
+                                    navigate(from, { replace: true });
+                                }
+
+                            })
+                            .catch(errors => console.error(errors))
+
+                    })
             })
 
-        navigate(from, { replace: true });
     };
 
     return (
@@ -95,6 +117,11 @@ const SingUp = () => {
                                 <Link className="text-red-500" to='/login'> Login</Link>
 
                             </p>
+                            <div class="divider ">OR</div>
+                            <button onClick={handleGoogleSinIn} className="text-6xl mx-auto" type="button" >
+                                <FcGoogle></FcGoogle>
+
+                            </button>
                         </form >
                     </div>
                 </div>

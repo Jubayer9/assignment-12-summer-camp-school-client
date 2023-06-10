@@ -4,11 +4,14 @@ import NotFound from "../Page/404/NotFound";
 import Home from "../Page/Home/Home/Home";
 import Login from "../Page/Login/Login";
 import SingUp from "../SingUp/SingUp";
-import Dashboard from "../Page/Dashboard/Dashboard";
 import PrivateRoute from "./PrivateRoute";
 import AllClasses from "../Page/AllClasses/AllClasses";
 import AllInstructors from "../Page/AllInstructors/AllInstructors";
 import MyClass from "../Page/Dashboard/MyClass/MyClass";
+import AllStudent from "../Page/Dashboard/AllStudent/AllStudent";
+import Dashboard from "../Page/Dashboard/Dashboard";
+import AddClass from "../Page/AddClass/AddClass";
+
 
 export const router = createBrowserRouter([
     {
@@ -24,32 +27,43 @@ export const router = createBrowserRouter([
                 element: <Login></Login>
             },
             {
-                path:'/signup',
-                element:<SingUp></SingUp>
+                path: '/signup',
+                element: <SingUp></SingUp>
 
             },
             {
-                path:"/allClasses",
-                element:<AllClasses></AllClasses>
+                path: "/allClasses",
+                element: <AllClasses></AllClasses>
             },
             {
-                path:"/instructor",
-                element:<AllInstructors></AllInstructors>
+                path: "/instructor",
+                element: <AllInstructors></AllInstructors>
             }
+
         ]
     },
     {
-        path:'/dashboard/myClass',
-        element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
-        children:[
+        path: '/',
+        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+        children: [
+
             {
-                path:'/dashboard/myClass',
-                element:<MyClass></MyClass>
+                path: 'myClasses',
+                element: <MyClass></MyClass>
+            },
+            {
+                path: 'allStudent',
+                element: <AllStudent></AllStudent>
+            },
+            {
+                path:'addClasses',
+                element: <AddClass></AddClass>
             }
         ]
     },
-    
-    
+
+
+
 
     {
         path: '*',
