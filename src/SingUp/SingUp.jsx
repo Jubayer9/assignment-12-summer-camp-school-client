@@ -117,7 +117,7 @@ const SingUp = () => {
                                 <Link className="text-red-500" to='/login'> Login</Link>
 
                             </p>
-                            <div class="divider ">OR</div>
+                            <div className="divider ">OR</div>
                             <button onClick={handleGoogleSinIn} className="text-6xl mx-auto" type="button" >
                                 <FcGoogle></FcGoogle>
 

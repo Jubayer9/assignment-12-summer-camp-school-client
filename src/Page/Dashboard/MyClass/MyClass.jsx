@@ -1,6 +1,7 @@
 import { FaTrash } from "react-icons/fa";
 import useClass from "../../Hook/useClass";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const MyClass = () => {
     const [selected,refetch]=useClass()
@@ -85,9 +86,15 @@ const MyClass = () => {
                 <th>
                   <button onClick={()=>handleDelete(my)} className="btn btn-ghost btn-xs">remove</button>
                 </th>
+                <th>
+                  <Link to='/payment'>
+
+                <button className="btn btn-outline btn-error btn-sm">pay</button>
+                  </Link>
+                </th>
               </tr>)
         }
-      {/* row 1 */}
+  
       
     </tbody>
     {/* foot */}
@@ -98,7 +105,7 @@ const MyClass = () => {
         <th className="text-red-600 text-lg font-semibold">total price :</th>
         <th className="text-white text-lg ">$ {total}</th>
         <th>
-        <button className="btn btn-outline btn-error btn-sm">pay</button>
+        
         </th>
       
       </tr>

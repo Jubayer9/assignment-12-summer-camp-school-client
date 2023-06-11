@@ -4,9 +4,13 @@ import Logo from '../../assets/img/pngtree-piano-violin-musical-logo-inspiration
 import { useContext } from "react";
 import { AuthContext } from "../../Page/Provider/AuthProvider";
 import useClass from "../../Page/Hook/useClass";
+import useAdmin from "../../Page/Hook/useAdmin";
+import DarkMode from "../../Page/Dark/DarkMode";
 const NevBar = () => {
   const [selected,] = useClass();
+  const [isAdmin]=useAdmin()
   const { user, logOut } = useContext(AuthContext)
+  console.log(isAdmin)
   const handleLogOut = () => {
     logOut()
       .then(() => { })
@@ -24,11 +28,17 @@ const NevBar = () => {
               <li><Link to='/' >Home</Link></li>
               <li><Link to='/instructor' >Instructors</Link></li>
               <li><Link to='/allClasses'>classes</Link></li>
-              <li>
-
-                <Link to='/myClasses'>Dashboard
-                  <button className="border-none badge  badge-secondary ">+{selected?.length || 0}</button>
-                </Link></li>
+             {isAdmin ?
+               <li>
+                
+               <Link to='/allStudent'>Dashboard
+                 <button className="border-none badge  badge-secondary ">+{selected?.length || 0}</button>
+               </Link></li>:
+                <li>
+               <Link to='/myClasses'>Dashboard
+                 <button className="border-none badge  badge-secondary ">+{selected?.length || 0}</button>
+               </Link></li>
+             }
 
             </ul>
           </div>
@@ -42,13 +52,16 @@ const NevBar = () => {
 
             <li><Link to='/allClasses'>classes</Link></li>
           { 
-          user?
+          isAdmin?
           <li>
-
-              <Link to='/myClasses'>Dashboard
-                <button className="border-none badge  badge-secondary ">+{selected?.length || 0}</button>
-              </Link></li>:
-              <p></p>
+                
+          <Link to='allStudent'>Dashboard
+            <button className="border-none badge  badge-secondary ">+{selected?.length || 0}</button>
+          </Link></li>:
+           <li>
+          <Link to='/myClasses'>Dashboard
+            <button className="border-none badge  badge-secondary ">+{selected?.length || 0}</button>
+          </Link></li>
               
             }
           </ul>
@@ -67,6 +80,7 @@ const NevBar = () => {
                 <Link to='/login' className=" btn btn-error btn-outline ">Login</Link>
               </>
           }
+          <DarkMode></DarkMode>
         </div>
       </div>
     </>

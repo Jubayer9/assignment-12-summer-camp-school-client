@@ -83,7 +83,7 @@ const Login = () => {
                                 Welcome new Student
                                 <Link className="text-red-500" to='/signup'> Sign Up</Link>
                             </p>
-                            <div class="divider ">OR</div>
+                            <div className="divider ">OR</div>
                             <button onClick={handleGoogleSinIn} className="text-6xl mx-auto" type="button" >
                                 <FcGoogle></FcGoogle>
 

@@ -11,6 +11,8 @@ import MyClass from "../Page/Dashboard/MyClass/MyClass";
 import AllStudent from "../Page/Dashboard/AllStudent/AllStudent";
 import Dashboard from "../Page/Dashboard/Dashboard";
 import AddClass from "../Page/AddClass/AddClass";
+import ManageClass from "../Page/Dashboard/ManageClass/ManageClass";
+import Payment from "../Page/Dashboard/Payment/Payment";
 
 
 export const router = createBrowserRouter([
@@ -58,6 +60,15 @@ export const router = createBrowserRouter([
             {
                 path:'addClasses',
                 element: <AddClass></AddClass>
+            },
+            {
+                path:'ManageClass',
+                element: <ManageClass></ManageClass>,
+                loader:()=>fetch('http://localhost:5000/addClass')
+            },
+            {
+                path:'payment',
+                element:<Payment></Payment>
             }
         ]
     },

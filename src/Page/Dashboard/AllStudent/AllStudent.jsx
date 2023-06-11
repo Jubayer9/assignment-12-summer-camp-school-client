@@ -76,7 +76,7 @@ const AllStudent = () => {
         </td>
      
         <td>
-          {student.role === 'admin' ?'admin':
+          { student.role === 'admin'? 'Instructor':
           <button onClick={()=>handleMakeAdmin(student)} className='btn'>
             <FaUserShield></FaUserShield>
           </button>

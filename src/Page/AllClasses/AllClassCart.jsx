@@ -54,13 +54,13 @@ const AllClassCart = ({ allClass, index }) => {
         <tr className='bg-violet-600 text-white'>
             <th>
                 <label>
-                    {index + 1}
+                    {index + 1}.
                 </label>
             </th>
             <td>
                 <div className="flex items-center space-x-3">
                     <div className="avatar">
-                        <div className="mask mask-squircle w-12 h-12">
+                        <div className="mask w-12 h-12">
                             <img src={image} alt="Avatar Tailwind CSS Component" />
                         </div>
                     </div>
@@ -77,7 +77,7 @@ const AllClassCart = ({ allClass, index }) => {
             </td>
             <td>${price}</td>
             <th>
-                <button onClick={() => handleSelect(allClass)} className="btn btn-outline btn-erro"> Select</button>
+                <button onClick={() => handleSelect(allClass)} className="btn btn-outline btn-error"> Select</button>
             </th>
         </tr>
     );

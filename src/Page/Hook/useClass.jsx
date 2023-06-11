@@ -9,11 +9,14 @@ const useClass = () => {
     const [axiosSecure] = useAxiosSecure();
     const { refetch, data: selected = [] } = useQuery({
         queryKey: ['selected', user?.email],
-        enabled:!loading,
+        enabled:!loading&&!!user?.email,
+
         queryFn: async () => {
             const res = await axiosSecure(`/selected?email=${user?.email}`)
+
             console.log('res axios', res);
             return res.data
+
         },
     })
     console.log(selected);
