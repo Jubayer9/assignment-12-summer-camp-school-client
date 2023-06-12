@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Swal from 'sweetalert2';
+import { AuthContext } from '../Provider/AuthProvider';
 
 const AddClass = () => {
+  const {user}=useContext(AuthContext)
   const handleAddClass = event => {
     event.preventDefault()
     const form = event.target;
@@ -17,8 +19,7 @@ const AddClass = () => {
       InstructorEmail,
       AvailableSeats,
       Price}
-      console.log(newClass);
-      fetch('http://localhost:5000/addClass',{
+      fetch('https://summer-camp-school-server-jubayer9.vercel.app/addClass',{
         method:'POST',
         headers:{
           'content-type':'application/json'
@@ -27,7 +28,6 @@ const AddClass = () => {
       })
       .then(res =>res.json())
       .then(data=>{
-        console.log(data);
         if(data.insertedId){
           Swal.fire(
             'New Class Added Now',
@@ -38,12 +38,17 @@ const AddClass = () => {
       })
   }
   return (
-    <div className=''>
-      <div className="hero  ">
+    <div>
+      <div className="hero ">
+        
         <div className="hero-content ">
-
           <form onSubmit={handleAddClass} className="card w-full   bg-violet-600">
+<h1 className='text-3xl font-semibold my-9  text-white text-center'>
+  Welcome Mr. {user.displayName}
+       </h1>
+       <hr />     
             <div className="card-body grid gap-x-8 gap-y-4 grid-cols-3">
+              
               <div className="form-control ">
                 <label className="label">
                   <span className="label-text  text-white">Class Image</span>
@@ -60,13 +65,13 @@ const AddClass = () => {
                 <label className="label">
                   <span className="label-text  text-white">Instructor name</span>
                 </label>
-                <input type="text" name='InstructorName' placeholder="Instructor name" className="input input-bordered" />
+                <input type="text" name='InstructorName' placeholder="Instructor name"defaultValue={user.displayName}   className="input input-bordered" />
               </div>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text  text-white">Instructor email</span>
                 </label>
-                <input type="text" name='InstructorEmail' placeholder="Instructor email" className="input input-bordered" />
+                <input type="text" defaultValue={user.email} name='InstructorEmail' placeholder="Instructor email" className="input input-bordered" />
               </div>
               <div className="form-control">
                 <label className="label">

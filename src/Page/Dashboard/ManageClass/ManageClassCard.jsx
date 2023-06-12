@@ -1,12 +1,7 @@
-import React from 'react';
+import { Link } from "react-router-dom";
 
-
-
-
-
-
-const ManageClassCard = ({ addClass,index }) => {
-   const {photoURL,ClassesName,InstructorName,InstructorEmail,AvailableSeats,Price}=addClass
+const ManageClassCard = ({ addClass, index }) => {
+    const { photoURL, ClassesName, InstructorName, InstructorEmail, AvailableSeats, Price, _id } = addClass
     return (
         <div>
             <div className="overflow-x-auto">
@@ -17,7 +12,7 @@ const ManageClassCard = ({ addClass,index }) => {
                         <tr>
                             <th>
                                 <label>
-                                    {index+1}
+                                    {index + 1}
                                 </label>
                             </th>
                             <td>
@@ -40,7 +35,23 @@ const ManageClassCard = ({ addClass,index }) => {
                             </td>
                             <td>{Price}</td>
                             <th>
-                                <button className="btn btn-ghost btn-xs">details</button>
+                                <Link to={`/updateClass/${_id}`}>
+                                    <button className="btn btn-error btn-outline btn-xs">Update</button>
+                                </Link>
+                            </th>
+                            <th>
+
+
+                                <a href="#my_modal_8" className="btn  btn-error btn-outline btn-xs">Feedback</a>
+                                <div className="modal" id="my_modal_8">
+                                    <div className="modal-box">
+                                        <h3 className="font-bold text-2xl text-center">Please provide your feedback</h3>
+                                        <textarea className="textarea w-full textarea-primary" placeholder="Feedback"></textarea>
+                                        <div className="modal-action">
+                                            <a href="#" className="btn btn-error btn-outline">Send</a>
+                                        </div>
+                                    </div>
+                                </div>
                             </th>
                         </tr>
 

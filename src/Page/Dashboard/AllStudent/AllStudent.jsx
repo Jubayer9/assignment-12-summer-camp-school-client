@@ -1,20 +1,44 @@
+import { data } from 'autoprefixer';
 import React from 'react';
-import { FaUserShield } from 'react-icons/fa';
+import { FaUser, FaUserShield } from 'react-icons/fa';
 import { useQuery } from 'react-query';
 import Swal from 'sweetalert2';
 
 const AllStudent = () => {
     const {data:students=[],refetch}=useQuery(['students'],async()=>{
-        const res = await fetch('http://localhost:5000/students')
+        const res = await fetch('https://summer-camp-school-server-jubayer9.vercel.app/students')
         return res.json();
     })
+
+
+
+const handleMakeInstructor= students =>{
+  fetch(`https://summer-camp-school-server-jubayer9.vercel.app/students/isInstructor/${students._id}`,{
+    method:'PATCH',
+  })
+.then(res=>res.json())
+.then(data=>{
+  if(data.modifiedCount){
+    refetch()
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: `${students.name}is instructor Now`,
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
+})
+}
+
+
+
    const handleMakeAdmin =student =>{
-    fetch(`http://localhost:5000/students/admin/${student._id}`,{
+    fetch(`https://summer-camp-school-server-jubayer9.vercel.app/students/admin/${student._id}`,{
         method:'PATCH'
     })
     .then(res => res.json())
     .then(data =>{
-        console.log(data);
         if(data.modifiedCount){
             refetch()
             Swal.fire({
@@ -35,7 +59,6 @@ const AllStudent = () => {
            </h3>
            <div className="overflow-x-auto">
   <table className="table">
-    {/* head */}
     <thead>
       <tr>
         <th>
@@ -76,18 +99,23 @@ const AllStudent = () => {
         </td>
      
         <td>
-          { student.role === 'admin'? 'Instructor':
-          <button onClick={()=>handleMakeAdmin(student)} className='btn'>
-            <FaUserShield></FaUserShield>
+          { student.role === 'admin'? 'admin': 
+          <button onClick={()=>handleMakeAdmin(student)} className='btn'> <FaUserShield></FaUserShield>
           </button>
            
           }
         </td>
         <td>
-          <button className="btn btn-ghost btn-xs">details</button>
+          {
+            student.role === 'isInstructor' ? 'Instructor':
+            <button onClick={()=>handleMakeInstructor(student)} className='btn'><FaUser></FaUser>
+            </button>
+          }
+         
         </td>
      
-      </tr>)
+      </tr>
+      )
       }
   
       

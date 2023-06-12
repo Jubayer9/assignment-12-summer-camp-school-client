@@ -11,10 +11,9 @@ const AllClassCart = ({ allClass, index }) => {
     const navigate = useNavigate();
     const location = useLocation()
     const handleSelect = allClass => {
-        console.log(allClass);
         if (user && user.email) {
             const selectedClass = { SelectedClassId: _id, image, name, instructorName, availableSeats, price,email:user.email }
-            fetch('http://localhost:5000/selected', {
+            fetch('https://summer-camp-school-server-jubayer9.vercel.app/selected', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'

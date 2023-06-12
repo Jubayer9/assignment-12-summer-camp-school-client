@@ -10,7 +10,6 @@ const NevBar = () => {
   const [selected,] = useClass();
   const [isAdmin]=useAdmin()
   const { user, logOut } = useContext(AuthContext)
-  console.log(isAdmin)
   const handleLogOut = () => {
     logOut()
       .then(() => { })

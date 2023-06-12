@@ -4,7 +4,7 @@ import AllInstructorsCart from './AllInstructorsCart';
 const AllInstructors = () => {
     const [allInstructors, setAllInstructors] = useState([])
     useEffect(() => {
-        fetch('http://localhost:5000/instructor')
+        fetch('https://summer-camp-school-server-jubayer9.vercel.app/instructor')
             .then(res => res.json())
             .then(data => setAllInstructors(data))
     }, [])

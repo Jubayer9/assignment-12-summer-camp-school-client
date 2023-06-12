@@ -2,6 +2,8 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useContext, useEffect, useState } from "react";
 import useAxiosSecure from "../../Hook/useAxiosSecure";
 import { AuthContext } from "../../Provider/AuthProvider";
+import useClass from "../../Hook/useClass";
+import Swal from "sweetalert2";
 
 
 const CheckoutForm = ({ price, selected }) => {
@@ -11,6 +13,7 @@ const CheckoutForm = ({ price, selected }) => {
     const [transactionId, setTransactionId] = useState('');
     const [axiosSecure] = useAxiosSecure()
     const { user } = useContext(AuthContext)
+    const [, refetch] = useClass();
     const stripe = useStripe()
     const elements = useElements();
     useEffect(() => {
@@ -36,7 +39,6 @@ const CheckoutForm = ({ price, selected }) => {
             card
         })
         if (error) {
-            console.log('error', error);
             setCardError(error.message)
         }
         else {
@@ -56,10 +58,7 @@ const CheckoutForm = ({ price, selected }) => {
                 },
             },
         );
-        if (confirmError) {
-            console.log(cardError);
-        }
-        console.log('payment intent', paymentIntent);
+     
         setProcessing(false)
         if (paymentIntent.status === 'succeeded') {
             setTransactionId(paymentIntent.id)
@@ -69,17 +68,34 @@ const CheckoutForm = ({ price, selected }) => {
                 price,
                 data: new Date(),
                 quantity: selected.length,
-                items: selected.map(item => item._id),
+
+                selectedItems: selected.map(item => item._id),
+                SelectedClassId: selected.map(item => item.SelectedClassId),
+                status: 'service Pending',
                 itemsNames: selected.map(item => item.name),
-                transactionId: selected.map(item => item.transactionId)
+
 
             }
-            axiosSecure.post('/payments', payment)
-                .then(res => {
-
-                    if (res.data.result.insertedId) {
-                    }
-                })
+            axiosSecure.delete('/payments', payment)
+            .then(res => {
+                refetch()
+                if (res.data.insertResult.insertedId) {
+    
+                }
+            })
+            Swal.fire({
+                title: ' Your payment is successfully payed 🥳🥳🥳',
+                width: 600,
+                padding: '3em',
+                color: '#716add',
+                background: '#fff url(/images/trees.png)',
+                backdrop: `
+                  rgba(0,0,123,0.4)
+                  url("/images/nyan-cat.gif")
+                  left top
+                  no-repeat
+                `
+              })
         }
 
     }

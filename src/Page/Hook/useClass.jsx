@@ -14,12 +14,10 @@ const useClass = () => {
         queryFn: async () => {
             const res = await axiosSecure(`/selected?email=${user?.email}`)
 
-            console.log('res axios', res);
             return res.data
 
         },
     })
-    console.log(selected);
     return [selected, refetch]
 };
 

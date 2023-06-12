@@ -5,7 +5,7 @@ import ClassCart from './ClassCart';
 const PopularClass = () => {
     const [classes,setClasses]=useState([])
     useEffect(() => {
-        fetch('http://localhost:5000/classes')
+        fetch('https://summer-camp-school-server-jubayer9.vercel.app/classes')
             .then(res => res.json())
             .then(data =>{
                 const PopularClasses =data.filter(oneClass =>oneClass.category ==='popular')

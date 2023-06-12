@@ -20,15 +20,14 @@ const SingUp = () => {
     const from = location.state?.from?.pathname || "/"
 
     const onSubmit = data => {
-        console.log(data)
         createUser(data.email, data.password)
-            .then(result => {
-                const loggedUser = result.user;
-                console.log(loggedUser);
+            .then(() => {
+                
+                
                 updateUserProfile(data.name, data.photoURL)
                     .then(() => {
                         const saveStudent = { name: data.name, email: data.email }
-                        fetch('http://localhost:5000/students', {
+                        fetch('https://summer-camp-school-server-jubayer9.vercel.app/students', {
                             method: 'POST',
                             headers: {
                                 'content-type': 'application/json'

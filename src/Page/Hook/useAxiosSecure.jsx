@@ -11,7 +11,7 @@ const useAxiosSecure = () => {
   const navigate = useNavigate();
 
   const axiosSecure = axios.create({
-    baseURL: 'http://localhost:5000',
+    baseURL: 'https://summer-camp-school-server-jubayer9.vercel.app',
   });
   useEffect(() => {
 

@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import Main from "../Layout/Main";
+import { BrowserRouter,  } from 'react-router-dom'
 import NotFound from "../Page/404/NotFound";
 import Home from "../Page/Home/Home/Home";
 import Login from "../Page/Login/Login";
@@ -13,6 +13,9 @@ import Dashboard from "../Page/Dashboard/Dashboard";
 import AddClass from "../Page/AddClass/AddClass";
 import ManageClass from "../Page/Dashboard/ManageClass/ManageClass";
 import Payment from "../Page/Dashboard/Payment/Payment";
+import Main from "../Layout/Main";
+import EnrolClasses from "../Page/EnrolClasses/EnrolClasses";
+import UpdateClass from "../Page/Dashboard/UpdateClass/UpdateClass";
 
 
 export const router = createBrowserRouter([
@@ -46,7 +49,7 @@ export const router = createBrowserRouter([
     },
     {
         path: '/',
-        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+        element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
         children: [
 
             {
@@ -58,17 +61,26 @@ export const router = createBrowserRouter([
                 element: <AllStudent></AllStudent>
             },
             {
-                path:'addClasses',
+                path: 'addClasses',
                 element: <AddClass></AddClass>
             },
             {
-                path:'ManageClass',
+                path: 'ManageClass',
                 element: <ManageClass></ManageClass>,
-                loader:()=>fetch('http://localhost:5000/addClass')
+                loader: () => fetch('https://summer-camp-school-server-jubayer9.vercel.app/addClass')
             },
             {
-                path:'payment',
-                element:<Payment></Payment>
+                path: 'payment',
+                element: <Payment></Payment>
+            },
+            {
+                path:'updateClass/:id',
+                element:<UpdateClass></UpdateClass>,
+                loader:({params})=>fetch(`https://summer-camp-school-server-jubayer9.vercel.app/addClass/${params.id}`)
+            },
+            {
+                path:'enrolClasses',
+                element:<EnrolClasses></EnrolClasses>
             }
         ]
     },

@@ -16,7 +16,7 @@ const Login = () => {
         .then(result => {
             const loggedInUser = result.user;
             const saveStudent = { name: loggedInUser.displayName, email: loggedInUser.email }
-                fetch('http://localhost:5000/students', {
+                fetch('https://summer-camp-school-server-jubayer9.vercel.app/students', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
@@ -37,11 +37,9 @@ const Login = () => {
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email, password);
         signIn(email, password)
             .then(result => {
                 const user = result.user;
-                console.log(user);
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
